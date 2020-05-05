@@ -471,7 +471,7 @@ int main(int argc, char *argv[])
 	for (j = 0; j < registered_master_count; j++) {
 		startchip = 0;
 		while (chipcount < (int)ARRAY_SIZE(flashes)) {
-			startchip = probe_flash(&registered_masters[j], startchip, &flashes[chipcount], 0);
+			startchip = probe_flash(&registered_masters[j], startchip, &flashes[chipcount], (chip_to_probe) && force);
 			if (startchip == -1)
 				break;
 			chipcount++;
@@ -514,7 +514,7 @@ int main(int argc, char *argv[])
 					  "chip, using the first one.\n");
 			for (j = 0; j < registered_master_count; j++) {
 				mst = &registered_masters[j];
-				startchip = probe_flash(mst, 0, &flashes[0], 1);
+				startchip = probe_flash(mst, 0, &flashes[0], 2);
 				if (startchip != -1)
 					break;
 			}
